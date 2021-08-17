@@ -437,8 +437,89 @@ context('TypeScript', function() {
             },
             parserConfig,
           ),
+          test(
+            {
+              code: "import type x from './foo'; import type y from './bar'",
+              parser,
+            },
+            parserConfig,
+          ),
+          test(
+            {
+              code: "import type {x} from './foo'; import type {y} from './bar'",
+              parser,
+            },
+            parserConfig,
+          ),
+          test(
+            {
+              code: "import type x from './foo'; import type {y} from './foo'",
+              parser,
+            },
+            parserConfig,
+          ),
         ],
-        invalid: [],
+        invalid: [
+          test(
+            {
+              code: "import type x from './foo'; import type y from './foo'",
+              parser,
+              errors: [
+                {
+                  line: 1,
+                  column: 20,
+                  message: "'./foo' imported multiple times.",
+                },
+                {
+                  line: 1,
+                  column: 48,
+                  message: "'./foo' imported multiple times.",
+                },
+              ],
+            },
+            parserConfig,
+          ),
+          test(
+            {
+              code: "import type x from './foo'; import type x from './foo'",
+              output: "import type x from './foo'; ",
+              parser,
+              errors: [
+                {
+                  line: 1,
+                  column: 20,
+                  message: "'./foo' imported multiple times.",
+                },
+                {
+                  line: 1,
+                  column: 48,
+                  message: "'./foo' imported multiple times.",
+                },
+              ],
+            },
+            parserConfig,
+          ),
+          test(
+            {
+              code: "import type {x} from './foo'; import type {y} from './foo'",
+              parser,
+              output: `import type {x,y} from './foo'; `,
+              errors: [
+                {
+                  line: 1,
+                  column: 22,
+                  message: "'./foo' imported multiple times.",
+                },
+                {
+                  line: 1,
+                  column: 52,
+                  message: "'./foo' imported multiple times.",
+                },
+              ],
+            },
+            parserConfig,
+          ),
+        ],
       });
     });
 });

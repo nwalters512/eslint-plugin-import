@@ -8,6 +8,7 @@ This change log adheres to standards from [Keep a CHANGELOG](http://keepachangel
 
 ### Fixed
 - `ExportMap`: Add default export when esModuleInterop is true and anything is exported ([#2184], thanks [@Maxim-Mazurok])
+- [`no-duplicates`]: type import fixer now generates valid TypeScript ([#2149])
 
 ### Changed
 - [Docs] `max-dependencies`: 📖 Document `ignoreTypeImports` option ([#2196], thanks [@himynameisdave])
@@ -896,6 +897,7 @@ for info on changes for earlier releases.
 [#2160]: https://github.com/import-js/eslint-plugin-import/pull/2160
 [#2158]: https://github.com/import-js/eslint-plugin-import/pull/2158
 [#2156]: https://github.com/import-js/eslint-plugin-import/pull/2156
+[#2149]: https://github.com/benmosher/eslint-plugin-import/pull/2149
 [#2146]: https://github.com/import-js/eslint-plugin-import/pull/2146
 [#2140]: https://github.com/import-js/eslint-plugin-import/pull/2140
 [#2138]: https://github.com/import-js/eslint-plugin-import/pull/2138
